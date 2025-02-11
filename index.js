@@ -1,12 +1,13 @@
 const express = require('express');
 const connectDB = require('./db');  // ✅ Fix: No destructuring
+const approute = require('./server');
 
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 8080;
 const url = process.env.db_url;
-
+ app.use(approute)
 app.listen(port, async () => {
   try {
     await connectDB(url);  // ✅ Now it will work correctly
