@@ -1,12 +1,17 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
+import TaskCard from "./components/TaskCard";
+
+const dummyTask = {
+  title: "Complete React Component",
+  description: "Create and render a component for ASAP project",
+  status: "Pending",
+};
 
 function App() {
   return (
-    <Router>
-      <LandingPage />
-    </Router>
+    <div className="p-5">
+      <h1 className="text-2xl font-bold">ASAP Project</h1>
+      <TaskCard task={dummyTask} />
+    </div>
   );
 }
 
