@@ -1,16 +1,30 @@
-import TaskCard from "./components/TaskCard";
-
-const dummyTask = {
-  title: "Complete React Component",
-  description: "Create and render a component for ASAP project",
-  status: "Pending",
-};
+import React, { useEffect, useState } from 'react';
+import TaskCard from './components/TaskCard';
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/tasks')
+      .then(response => response.json())
+      .then(data => setTasks(data));
+  }, []);
+
   return (
-    <div className="p-5">
-      <h1 className="text-2xl font-bold">ASAP Project</h1>
-      <TaskCard task={dummyTask} />
+    <div>
+      <h1>Tasks</h1>
+      <ul>
+        {tasks.map(task => (
+          <TaskCard
+            key={task._id}
+            title={task.title}
+            category={task.category}
+            priority={task.priority}
+            deadline={task.deadline}
+            completed={task.completed}
+          />
+        ))}
+      </ul>
     </div>
   );
 }
